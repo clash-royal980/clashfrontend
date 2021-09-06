@@ -1,7 +1,7 @@
 <template>
   <div class="gamenewlistbar">
     <van-tabs v-model="active">
-      <van-tab title="热门">
+      <van-tab title="热门" name="热门"  infinite-scroll-distance="70" v-infinite-scroll="loadmore" infinite-scroll-disabled="busy" :infinite-scroll-immediate-check="true">
         <div class="articleItem" v-for="(item,index) in articles" :key="index">
           <router-link :to="`/detail?id=${item.hi_id}`">
             <!-- 文章图文信息开始 -->
@@ -22,10 +22,10 @@
           </router-link>
         </div>
       </van-tab>
-      <van-tab title="战报">战报</van-tab>
-      <van-tab title="深度">深度</van-tab>
-      <van-tab title="采访">采访</van-tab>
-      <van-tab title="花絮">花絮</van-tab>
+      <van-tab title="战报" name="战报">战报</van-tab>
+      <van-tab title="深度" name="深度">深度</van-tab>
+      <van-tab title="采访" name="采访">采访</van-tab>
+      <van-tab title="花絮" name="花絮">花絮</van-tab>
     </van-tabs>
   </div>
 </template>
@@ -34,35 +34,65 @@ import Vue from 'vue';
 export default {
   data(){
     return{
-      active:'',
+      active:'热门',
       articles:[],
       navh:"44px",
       navFont:'14px',
       data:Date.parse(new Date()),
       imgw:"71px",
-      itemtop:"4px"
+      itemtop:"4px",
+      busy:false,
+      page:1,      //当前页码
+      count:0   //总页码
     }
   },
   methods:{
      navHeight(){
-      let screenh=window.screen.height //屏幕宽度的像素
+      let screenh=window.screen.height 
       let swipeh=Math.floor(44*screenh/667)+'px';
       this.navh=swipeh; 
     },
     navFon(){
-      let screenh=window.screen.height //屏幕宽度的像素
+      let screenh=window.screen.height 
       let swipeh=Math.floor(14*screenh/667)+'px';
       this.navFont=swipeh; 
     },
     imgwidth(){
-      let screenw=window.screen.width //屏幕宽度的像素
+      let screenw=window.screen.width 
       let swipew=Math.floor(71*screenw/375)+'px';
       this.imgw=swipew; 
     },
     itemt(){
-      let screenh=window.screen.height //屏幕宽度的像素
+      let screenh=window.screen.height 
       let swipeh=Math.floor(4*screenh/667)+'px';
       this.itemtop=swipeh; 
+    },
+    loadmore(){
+      if(this.page>this.count){
+        this.$toast({
+          message: '没有更多数据了',
+          position: 'bottom',
+          duration: 1000
+        });
+        return;
+      }
+      this.$indicator.open({
+        text:'加载中',
+        // spinnerType:'fading-circle'
+        // spinnerType:'snake'
+        // spinnerType:'double-bounce'
+        spinnerType:'triple-bounce'
+      })
+      this.busy=true;//防止重复调用loadmore
+      let cid = this.active;
+      this.page++;
+      // 发送http请求
+      this.axios.get(`/newsall?cid=${cid}&page=${this.page}`).then(result=>{
+        console.log(result);
+        this.articles.push(...result.data.results);
+        this.busy=false;
+      })
+      this.$indicator.close();
     }
   },
   created(){
@@ -78,9 +108,10 @@ export default {
     this.navHeight();
     this.navFon();
     this.imgwidth();
-    this.axios.get('/newsall').then(result=>{
-        console.log(result.data.results);
+    this.axios.get('/newsall?cid=热门&page=1').then(result=>{
+        console.log(result);
         this.articles=result.data.results;
+        this.count=result.data.pagecount
       })
   },
 }
@@ -93,7 +124,7 @@ export default {
   background-color: rgba(14, 97, 170, .6); 
 }
 .gamenewlistbar .van-tab__pane{
-  margin-bottom: 20vh;
+  margin-bottom: 10vh;
 }
 .gamenewlistbar .tabs{
   background-color: #227FC1;
