@@ -43,7 +43,8 @@ export default {
       itemtop:"4px",
       busy:false,
       page:1,      //当前页码
-      count:0   //总页码
+      count:0,   //总页码
+      flag:false
     }
   },
   methods:{
@@ -68,12 +69,15 @@ export default {
       this.itemtop=swipeh; 
     },
     loadmore(){
-      if(this.page>this.count){
+      if(this.flag){return}
+      if(this.page==this.count){
         this.$toast({
           message: '没有更多数据了',
           position: 'bottom',
           duration: 1000
         });
+        this.flag=true;
+        this.$indicator.close();
         return;
       }
       this.$indicator.open({
@@ -91,8 +95,8 @@ export default {
         console.log(result);
         this.articles.push(...result.data.results);
         this.busy=false;
+        this.$indicator.close();
       })
-      this.$indicator.close();
     }
   },
   created(){
@@ -113,6 +117,17 @@ export default {
         this.articles=result.data.results;
         this.count=result.data.pagecount
       })
+  },
+  watch:{
+    active(newvalue){
+      this.page=1;
+      // 将滚动条滚到页面顶部
+      window.scrollTo(0,0);
+      this.axios.get(`/newsall?cid=${newvalue}&page=1`).then(result=>{
+        console.log(result.data.results);
+        this.articles=result.data.results;
+      })
+    }
   },
 }
 
