@@ -1,40 +1,51 @@
 <template>
   <div class="gamenewlistbar">
     <van-tabs v-model="active">
-      <van-tab title="热门" name="热门"  infinite-scroll-distance="70" v-infinite-scroll="loadmore" infinite-scroll-disabled="busy" :infinite-scroll-immediate-check="true">
+      <van-tab title="热门" name="热门"  infinite-scroll-distance="70" infinite-scroll-disabled="busy" v-infinite-scroll="loadmore"  :infinite-scroll-immediate-check="true">
         <div class="articleItem" v-for="(item,index) in articles" :key="index">
           <router-link :to="`/detail?id=${item.hi_id}`">
             <!-- 文章图文信息开始 -->
             <div class="articleItem-wrapper">
-              <!-- 文章图像开始  -->
               <div class="articleImg">
                 <img :src="`${item.hi_pic}`" :style="{width:imgw}"/>
               </div>
-              <!-- 文章图像结束 -->
-              <!-- 文章简介开始 -->
               <div class="articleDes" :style="{fontSize:navFont}">
                 <span>{{item.hi_title}}</span>
                 <div class="time" :style="{marginTop:itemtop}">{{moment.unix(item.hi_time).format('YYYY-MM-DD')}}</div> 
               </div>
-              <!-- 文章简介结束 -->
             </div>
             <!-- 文章图文信息结束 -->
           </router-link>
         </div>
       </van-tab>
-      <van-tab title="战报" name="战报">战报</van-tab>
-      <van-tab title="深度" name="深度">深度</van-tab>
-      <van-tab title="采访" name="采访">采访</van-tab>
-      <van-tab title="花絮" name="花絮">花絮</van-tab>
+      <van-tab title="战报" name='战报'>
+        <div class="articleItem" v-for="(item,index) in articles" :key="index">
+          <router-link :to="`/detail?id=${item.hi_id}`">
+            <!-- 文章图文信息开始 -->
+            <div class="articleItem-wrapper">
+              <div class="articleImg">
+                <img :src="`${item.hi_pic}`" :style="{width:imgw}"/>
+              </div>
+              <div class="articleDes" :style="{fontSize:navFont}">
+                <span>{{item.hi_title}}</span>
+                <div class="time" :style="{marginTop:itemtop}">{{moment.unix(item.hi_time).format('YYYY-MM-DD')}}</div> 
+              </div>
+            </div>
+            <!-- 文章图文信息结束 -->
+          </router-link>
+        </div>
+      </van-tab>
+      <van-tab title="深度" name='深度'>深度</van-tab>
+      <van-tab title="采访" name='采访'>采访</van-tab>
+      <van-tab title="花絮" name='花絮'>花絮</van-tab>
     </van-tabs>
   </div>
 </template>
 <script>
-import Vue from 'vue';
 export default {
   data(){
     return{
-      active:'热门',
+      active:this.$store.state.type,
       articles:[],
       navh:"44px",
       navFont:'14px',
@@ -44,7 +55,7 @@ export default {
       busy:false,
       page:1,      //当前页码
       count:0,   //总页码
-      flag:false
+      flag:false,
     }
   },
   methods:{
@@ -112,10 +123,18 @@ export default {
     this.navHeight();
     this.navFon();
     this.imgwidth();
-    this.axios.get('/newsall?cid=热门&page=1').then(result=>{
+    this.$indicator.open({
+        text:'加载中',
+        // spinnerType:'fading-circle'
+        // spinnerType:'snake'
+        // spinnerType:'double-bounce'
+        spinnerType:'triple-bounce'
+    })
+    this.axios.get(`/newsall?cid=${this.active}&page=1`).then(result=>{
         console.log(result);
         this.articles=result.data.results;
         this.count=result.data.pagecount
+        this.$indicator.close();
       })
   },
   watch:{
@@ -126,7 +145,8 @@ export default {
       this.axios.get(`/newsall?cid=${newvalue}&page=1`).then(result=>{
         console.log(result.data.results);
         this.articles=result.data.results;
-      })
+      });
+      this.$store.commit('changetype',this.active)
     }
   },
 }
@@ -150,6 +170,12 @@ export default {
   border-top-right-radius: .5rem;
   border-top-left-radius: .5rem;
   border: 1px solid #114971;
+}
+.gamenewlistbar .van-tabs{
+  position: static;
+}
+.gamenewlistbar .van-tabs__nav{
+  position:relative;
 }
 .gamenewlistbar .van-tabs__nav{
   background-color: transparent;

@@ -1,11 +1,11 @@
 <template>
   <div class="carouselbar">
-     <mt-swipe :style="{height:h,marginBottom:parseInt(h)*0.05+'px'}" :speed="1000" :auto="1000" :showIndicators="false" :continuous="true" class="mtswipe"  ref="swipe">
+     <mt-swipe :style="{height:h,marginBottom:parseInt(h)*0.05+'px'}" :speed="1000" :auto="1000" :showIndicators="false" :continuous="true" class="mtswipe">
         <mt-swipe-item v-for="(item,index) in carouse" :key="index">
             <p :style="{top:parseInt(h)-parseInt(ph)+'px',height:ph,lineHeight:ph,fontSize:fs}">
             {{item.title}}</p>
             <img :src="`${item.img}`" alt="">
-            <span :style="{marginTop: parseInt(h)-parseInt(ph)+'px',lineHeight:ph,fontSize:fs}">{{item.id}}<a :style="{fontSize:parseFloat(fs)*0.8+'rem'}">/{{carouse.length}}</a></span>
+            <span :style="{marginTop: parseInt(h)-parseInt(ph)+'px',lineHeight:ph,fontSize:fs}">{{item.id}}<a :style="{fontSize:parseFloat(fs)*0.8+'px'}">/{{carouse.length}}</a></span>
         </mt-swipe-item>
       </mt-swipe>
       <div class="gamepic">
@@ -20,7 +20,7 @@ export default {
     return{
       h:'298px',
       ph:'40px',
-      fs:'1rem',
+      fs:'16px',
       carouse:[
         {id:1,title:'《你问我来答》EP2之翻牌大会',img:'/img/carouserl/1.png'},
         {id:2,title:'诛神之夜！日本“魔鬼”新人一穿五夺冠',img:'/img/carouserl/2.png'},
@@ -42,9 +42,15 @@ export default {
       this.ph=swipeh; 
     },
     Fs(){
-      let swipeh=parseInt(this.ph)*1/40+'rem';
+      let swipeh=parseInt(this.ph)*16/40+'px';
       this.fs=swipeh; 
     },
+  },
+  created() {
+    this.$nextTick(function(){
+      var wei = document.querySelector('.mint-swipe');
+        wei.style.transform='translateZ(0)';
+    })
   },
   mounted(){
     this.initSwipeHeight();
@@ -56,6 +62,9 @@ export default {
 <style>
 .carouselbar .mtswipe{
   position: relative;
+}
+.carouselbar .mint-swipe{
+  transform: translateZ(0);
 }
 .carouselbar .mtswipe img{width: 100%;}
 .carouselbar .mtswipe p{
@@ -78,7 +87,7 @@ export default {
 }
 .carouselbar .mtswipe span a{
   color: #aaa;
-  font-size: .8rem;
+  /* font-size: .8rem; */
 }
 .carouselbar .gamepic{
   position: relative;

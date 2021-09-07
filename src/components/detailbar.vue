@@ -35,7 +35,7 @@ export default {
     return{
       list:{}, //数据详情
       pfont:'14px',
-      tfont:'16px'
+      tfont:'16px',
     }
   },
   methods: {
@@ -59,7 +59,7 @@ export default {
   mounted() {
     this.pchange();
     this.tchange();
-    let id = this.$route.query.id
+    let id = this.$route.query.id;
     this.axios.get(`/detail?id=${id}`).then(result=>{
         console.log(result.data.results);
         this.list=result.data.results;
