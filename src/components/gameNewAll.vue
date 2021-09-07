@@ -1,7 +1,7 @@
 <template>
   <div class="gamenewlistbar">
     <van-tabs v-model="active">
-      <van-tab title="热门" name="热门"  infinite-scroll-distance="70" infinite-scroll-disabled="busy" v-infinite-scroll="loadmore"  :infinite-scroll-immediate-check="true">
+      <van-tab title="热门" infinite-scroll-distance="70" infinite-scroll-disabled="busy" v-infinite-scroll="loadmore"  :infinite-scroll-immediate-check="true">
         <div class="articleItem" v-for="(item,index) in articles" :key="index">
           <router-link :to="`/detail?id=${item.hi_id}`">
             <!-- 文章图文信息开始 -->
@@ -18,26 +18,10 @@
           </router-link>
         </div>
       </van-tab>
-      <van-tab title="战报" name='战报'>
-        <div class="articleItem" v-for="(item,index) in articles" :key="index">
-          <router-link :to="`/detail?id=${item.hi_id}`">
-            <!-- 文章图文信息开始 -->
-            <div class="articleItem-wrapper">
-              <div class="articleImg">
-                <img :src="`${item.hi_pic}`" :style="{width:imgw}"/>
-              </div>
-              <div class="articleDes" :style="{fontSize:navFont}">
-                <span>{{item.hi_title}}</span>
-                <div class="time" :style="{marginTop:itemtop}">{{moment.unix(item.hi_time).format('YYYY-MM-DD')}}</div> 
-              </div>
-            </div>
-            <!-- 文章图文信息结束 -->
-          </router-link>
-        </div>
-      </van-tab>
-      <van-tab title="深度" name='深度'>深度</van-tab>
-      <van-tab title="采访" name='采访'>采访</van-tab>
-      <van-tab title="花絮" name='花絮'>花絮</van-tab>
+      <van-tab title="战报">战报</van-tab>
+      <van-tab title="深度">深度</van-tab>
+      <van-tab title="采访">采访</van-tab>
+      <van-tab title="花絮">花絮</van-tab>
     </van-tabs>
   </div>
 </template>

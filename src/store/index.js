@@ -5,7 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    type:'热门'
+    type:'0'
   },
   mutations: {
     changetype(state,newtype){
