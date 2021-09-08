@@ -1,7 +1,24 @@
 <template>
   <div class="gamenewlistbar">
-    <van-tabs v-model="active">
-      <van-tab title="热门" infinite-scroll-distance="70" infinite-scroll-disabled="busy" v-infinite-scroll="loadmore"  :infinite-scroll-immediate-check="true">
+    <van-tabs v-model="active" animated v-infinite-scroll="loadmore" infinite-scroll-distance="70" infinite-scroll-disabled="busy"  :infinite-scroll-immediate-check="true">
+      <van-tab title="热门">
+        <div class="articleItem" v-for="(item,index) in articles" :key="index">
+          <router-link :to="`/detail?id=${item.hi_id}`">
+            <!-- 文章图文信息开始 -->
+            <div class="articleItem-wrapper">
+              <div class="articleImg">
+                <img :src="`${item.hi_pic}`" :style="{width:imgw}"/>
+              </div>
+              <div class="articleDes" :style="{fontSize:navFont}">
+                <span>{{item.hi_title}}</span>
+                <div class="time" :style="{marginTop:itemtop}">{{moment.unix(item.hi_time).format('YYYY-MM-DD')}}</div>
+              </div>
+            </div>
+            <!-- 文章图文信息结束 -->
+          </router-link>
+        </div>
+      </van-tab>
+      <van-tab title="战报">
         <div class="articleItem" v-for="(item,index) in articles" :key="index">
           <router-link :to="`/detail?id=${item.hi_id}`">
             <!-- 文章图文信息开始 -->
@@ -18,10 +35,41 @@
           </router-link>
         </div>
       </van-tab>
-      <van-tab title="战报">战报</van-tab>
-      <van-tab title="深度">深度</van-tab>
-      <van-tab title="采访">采访</van-tab>
-      <van-tab title="花絮">花絮</van-tab>
+      <van-tab title="深度">
+        <div class="articleItem" v-for="(item,index) in articles" :key="index">
+          <router-link :to="`/detail?id=${item.hi_id}`">
+            <!-- 文章图文信息开始 -->
+            <div class="articleItem-wrapper">
+              <div class="articleImg">
+                <img :src="`${item.hi_pic}`" :style="{width:imgw}"/>
+              </div>
+              <div class="articleDes" :style="{fontSize:navFont}">
+                <span>{{item.hi_title}}</span>
+                <div class="time" :style="{marginTop:itemtop}">{{moment.unix(item.hi_time).format('YYYY-MM-DD')}}</div>
+              </div>
+            </div>
+            <!-- 文章图文信息结束 -->
+          </router-link>
+        </div>
+      </van-tab>
+      <van-tab title="采访">
+        <div class="articleItem" v-for="(item,index) in articles" :key="index">
+          <router-link :to="`/detail?id=${item.hi_id}`">
+            <!-- 文章图文信息开始 -->
+            <div class="articleItem-wrapper">
+              <div class="articleImg">
+                <img :src="`${item.hi_pic}`" :style="{width:imgw}"/>
+              </div>
+              <div class="articleDes" :style="{fontSize:navFont}">
+                <span>{{item.hi_title}}</span>
+                <div class="time" :style="{marginTop:itemtop}">{{moment.unix(item.hi_time).format('YYYY-MM-DD')}}</div>
+              </div>
+            </div>
+            <!-- 文章图文信息结束 -->
+          </router-link>
+        </div>
+      </van-tab>
+      <van-tab title="花絮"></van-tab>
     </van-tabs>
   </div>
 </template>
@@ -89,6 +137,7 @@ export default {
       this.axios.get(`/newsall?cid=${cid}&page=${this.page}`).then(result=>{
         console.log(result);
         this.articles.push(...result.data.results);
+        this.count=result.data.pagecount
         this.busy=false;
         this.$indicator.close();
       })
@@ -129,6 +178,8 @@ export default {
       this.axios.get(`/newsall?cid=${newvalue}&page=1`).then(result=>{
         console.log(result.data.results);
         this.articles=result.data.results;
+        this.count=result.data.pagecount
+        this.flag=false
       });
       this.$store.commit('changetype',this.active)
     }
