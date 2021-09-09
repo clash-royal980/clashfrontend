@@ -33,7 +33,7 @@
 export default {
   data(){
     return{
-      selected:'1',
+      selected:this.$store.state.btnindex,
       height:'50px',
       btn:'26px'
     }
@@ -54,6 +54,16 @@ export default {
       }
     })
   },
+  watch:{
+    selected(newvalue){
+      this.$store.commit('changebtnindex',this.selected)
+      if(newvalue=='1'){
+        this.$router.push('/')
+      }else if(newvalue=='2'){
+        this.$router.push('/tenking')
+      }
+    }
+  }
 }
 </script>
 <style>

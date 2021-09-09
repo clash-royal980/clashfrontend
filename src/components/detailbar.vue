@@ -72,6 +72,7 @@ export default {
   background-image: url(/img/bg.jpg);
   /* height: 100vh; */
   color: #fff;
+  margin-bottom: 200px;
 }
 .article .mint-header{
   background-color: transparent;

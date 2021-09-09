@@ -69,7 +69,23 @@
           </router-link>
         </div>
       </van-tab>
-      <van-tab title="花絮"></van-tab>
+      <van-tab title="花絮">
+        <div class="articleItem" v-for="(item,index) in articles" :key="index">
+          <router-link :to="`/detail?id=${item.hi_id}`">
+            <!-- 文章图文信息开始 -->
+            <div class="articleItem-wrapper">
+              <div class="articleImg">
+                <img :src="`${item.hi_pic}`" :style="{width:imgw}"/>
+              </div>
+              <div class="articleDes" :style="{fontSize:navFont}">
+                <span>{{item.hi_title}}</span>
+                <div class="time" :style="{marginTop:itemtop}">{{moment.unix(item.hi_time).format('YYYY-MM-DD')}}</div>
+              </div>
+            </div>
+            <!-- 文章图文信息结束 -->
+          </router-link>
+        </div>
+      </van-tab>
     </van-tabs>
   </div>
 </template>

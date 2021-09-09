@@ -2,7 +2,7 @@
   <div class="index">
     <carouse></carouse>
     <game-new-list></game-new-list>
-    <bottom-btn></bottom-btn>
+    <!-- <bottom-btn></bottom-btn> -->
   </div>
 </template>
 

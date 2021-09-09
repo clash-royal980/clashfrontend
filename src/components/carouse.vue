@@ -22,11 +22,12 @@ export default {
       ph:'40px',
       fs:'16px',
       carouse:[
-        {id:1,title:'《你问我来答》EP2之翻牌大会',img:'/img/carouserl/1.png'},
-        {id:2,title:'诛神之夜！日本“魔鬼”新人一穿五夺冠',img:'/img/carouserl/2.png'},
-        {id:3,title:' C博士呕血新作 史上最全卡组教学来了！',img:'/img/carouserl/3.png'},
-        {id:4,title:'天王再临！十大天王争霸赛第二赛季震撼回归 ',img:'/img/carouserl/4.png'},
-        {id:5,title:'赛制详解！你离1000万只差这份攻略！',img:'/img/carouserl/5.jpg'}]
+        // {id:1,title:'《你问我来答》EP2之翻牌大会',img:'/img/carouserl/1.png'},
+        // {id:2,title:'诛神之夜！日本“魔鬼”新人一穿五夺冠',img:'/img/carouserl/2.png'},
+        // {id:3,title:' C博士呕血新作 史上最全卡组教学来了！',img:'/img/carouserl/3.png'},
+        // {id:4,title:'天王再临！十大天王争霸赛第二赛季震撼回归 ',img:'/img/carouserl/4.png'},
+        // {id:5,title:'赛制详解！你离1000万只差这份攻略！',img:'/img/carouserl/5.jpg'}
+        ]
     }
   },
   methods:{
@@ -56,6 +57,10 @@ export default {
     this.initSwipeHeight();
     this.PHeight();
     this.Fs();
+    this.axios.get(`/carouse`).then(result=>{
+        console.log(result.data.results);
+        this.carouse=result.data.results;
+      });
   },
 }
 </script>

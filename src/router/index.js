@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Index from '../views/Index.vue'
 import Detail from '../views/detail.vue'
-import test from '../views/test.vue'
+import TenKing from '../views/tenKing.vue'
 
 Vue.use(VueRouter)
 
@@ -18,9 +18,9 @@ const routes = [
     component: Detail
   },
   {
-    path: '/test',
-    name: 'test',
-    component: test
+    path: '/tenking',
+    name: 'TenKing',
+    component: TenKing
   },
 ]
 
