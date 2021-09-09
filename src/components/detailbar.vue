@@ -69,10 +69,11 @@ export default {
 </script>
 <style>
 .article{
+  position: relative;
+  z-index: 10;
   background-image: url(/img/bg.jpg);
   /* height: 100vh; */
   color: #fff;
-  margin-bottom: 200px;
 }
 .article .mint-header{
   background-color: transparent;
@@ -84,7 +85,7 @@ export default {
   margin: 0 10px;
   padding: 0 10px;
   padding-top: 20px;
-  margin-bottom: 80px;
+  margin-bottom: 40px;
 }
 .article .rich-content p{
   line-height: 1.7;

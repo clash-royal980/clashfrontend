@@ -30,6 +30,7 @@ export default {
   align-content: center;
   justify-content: center;
   padding: .3rem 0;
+  z-index: 10;
 }
 .sendsaybar input{
   height: 5vh;
