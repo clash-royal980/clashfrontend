@@ -1,14 +1,14 @@
 <template>
   <div class="tenking">
-    123
+    <ten-king-game></ten-king-game>
     <!-- <bottom-btn></bottom-btn> -->
   </div>
 </template>
 <script>
-import bottomBtn from '../components/bottombtn.vue'
+import tenKingGame from '../components/tenkinggame.vue'
 export default {
   components: {
-    bottomBtn
+    tenKingGame
   }
 }
 </script>

@@ -9,7 +9,7 @@
       <mt-tab-item id="2" class="item">
         <img slot="icon" src="/img/2.png">
         <span :style="{fontSize:parseInt(height)*14/50+'px'}">十大天王</span>
-        <div slot="icon"></div> 
+        <div slot="icon"></div>
       </mt-tab-item>
       <mt-tab-item id="3" class="item">
         <img slot="icon" src="/img/3.png">
@@ -33,7 +33,7 @@
 export default {
   data(){
     return{
-      selected:this.$store.state.btnindex,
+      selected:'1',
       height:'50px',
       btn:'26px'
     }
@@ -52,16 +52,20 @@ export default {
         btn[i].style.height = this.btn;
         btn[i].style.width = this.btn;
       }
+      if(location.pathname.slice(1)=='tenking'){
+        this.selected = '2';
+      }
     })
   },
   watch:{
     selected(newvalue){
-      this.$store.commit('changebtnindex',this.selected)
       if(newvalue=='1'){
         this.$router.push('/')
       }else if(newvalue=='2'){
+        if(location.pathname.slice(1)=='tenking') return;
         this.$router.push('/tenking')
       }
+      
     }
   }
 }
