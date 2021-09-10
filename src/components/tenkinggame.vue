@@ -15,10 +15,32 @@
       <i style="color:#0284C5;position: absolute;right:0">赛程图</i>
       <h5>
         <span style="position: absolute;left:0"></span>
-        <span style="position: absolute;left:15px">上一周</span>
+        <span style="position: absolute;left:0">上一周</span>
         踢馆赛&冒泡赛W3
         <span style="position: absolute;right:0">下一周</span>
+        <span style="position: absolute;right:0"></span>
       </h5>
+    </div>
+    <div class="player">
+      <ul>
+        <li>
+          <div class="time">09-04</div>
+          <div class="fplay">
+            <img src="/img/tenking/people/1.png" alt="">
+            <span>Smuki</span>
+          </div>
+          <div class="bifen">
+            <span>1 : 2</span>
+          </div>
+          <div class="tplay">
+            <img src="/img/tenking/people/2.png" alt="">
+            <span>guoyuan</span>
+          </div>
+          <div class="xizb">
+            <span>详细战报</span>
+          </div>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
@@ -81,16 +103,37 @@ export default {
 .tenkinggame .gamecontent i{
     font-style: inherit;
 }
-.gamecontent h5{
+.tenkinggame .gamecontent h5{
   background-color: #BDCAD2;
+  padding: 1vh 0;
 }
-.gamecontent h5 span:first-child{
-  width: 10px;
+.tenkinggame .gamecontent h5 span:first-child{
+  width:30px;
   height: 30px;
   background-image: url(/img/tenking/team_sp.24e9ce0.png);
   background-position: -80px -220px;
-  padding-left: 25px;
 }
+.tenkinggame .gamecontent h5 span:last-child{
+  width:30px;
+  height: 30px;
+  background-image: url(/img/tenking/team_sp.24e9ce0.png);
+  background-position: -80px -267px;
+}
+.tenkinggame .player ul{
+  background-color: #E4EDF2;
+  margin: 0 auto;
+  width: 90%;
+  border-bottom: 1px solid #ddd;
+}
+.tenkinggame .player ul li{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+
+
+/* 媒体查询 */
 @media screen and (min-width:280px) {
     .tenkinggame .gametitle{
       width: 90.09px;
@@ -112,6 +155,25 @@ export default {
     .tenkinggame .gamecontent i{
       font-size: 12px;
       line-height: 22px;;
+    }
+    .tenkinggame .gamecontent h5{
+      font-size: 12px;
+    }
+    .tenkinggame .gamecontent h5 span:first-child{
+      zoom: .4;
+      margin-top: 6px;
+      margin-left: 5px;
+    }
+    .tenkinggame .gamecontent h5 span:nth-child(2){
+      margin-left: 15px;
+    }
+    .tenkinggame .gamecontent h5 span:last-child{
+      zoom: .4;
+      margin-top: 6px;
+      margin-right: 5px;
+    }
+    .tenkinggame .gamecontent h5 span:nth-child(3){
+      margin-right: 15px;
     }
 }
 @media screen and (min-width:320px) {
@@ -152,6 +214,35 @@ export default {
     .tenkinggame .gamecontent>span{
       font-size: 16.5px;
     }
+    .tenkinggame .player ul li{
+      height: 53.6px;
+    }
+    .tenkinggame .player ul li .time{
+      font-size: 12px;
+      line-height: 53.6px;
+      margin-right: 15px;
+    }
+    .tenkinggame .player ul li .xizb{
+      font-size: 12px;
+      line-height: 53.6px;
+      margin-left: 18px;
+      color: #0284c5;
+    }
+    .tenkinggame .player ul li img{
+      width: 18px;
+      margin-top: 10px;
+    }
+    .tenkinggame .player ul li .bifen{
+      margin-top: 18px;
+    }
+    .tenkinggame .player ul li .fplay{
+      width: 50px;
+      font-size: 14px;
+    }
+    .tenkinggame .player ul li .tplay{
+      width: 50px;
+      font-size: 14px;
+    }
 }
 
 @media screen and (min-width:400px) {
@@ -172,6 +263,19 @@ export default {
   .tenkinggame .gamecontent i{
       font-size: 12px;
       line-height: 25px;
+  }
+  .tenkinggame .gamecontent h5{
+      font-size: 14px;
+  }
+  .tenkinggame .gamecontent h5 span:first-child{
+      zoom: .4;
+      margin-top: 10px;
+      margin-left: 6px;
+  }
+  .tenkinggame .gamecontent h5 span:last-child{
+      zoom: .4;
+      margin-top: 10px;
+      margin-right: 6px;
   }
 }
 
@@ -200,7 +304,7 @@ export default {
 }
 
 @media screen and (min-width:640px) {
-    .tenkinggame .gametitle{
+  .tenkinggame .gametitle{
     width: 240px;
     height: 77px;
     line-height: 77px;
@@ -221,6 +325,25 @@ export default {
       font-size: 22px;
       line-height: 45px;
   }
+  .tenkinggame .gamecontent h5{
+      font-size: 22px;
+  }
+  .tenkinggame .gamecontent h5 span:first-child{
+      zoom: .8;
+      margin-top: 6px;
+      margin-left: 5px;
+    }
+  .tenkinggame .gamecontent h5 span:nth-child(2){
+      margin-left: 30px;
+    }
+  .tenkinggame .gamecontent h5 span:last-child{
+      zoom: .8;
+      margin-top: 6px;
+      margin-right: 5px;
+    }
+  .tenkinggame .gamecontent h5 span:nth-child(3){
+      margin-right: 30px;
+    }
 }
 @media screen and (min-width:1024px) {
   .tenkinggame .gametitle{
