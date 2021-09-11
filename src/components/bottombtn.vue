@@ -1,5 +1,5 @@
 <template>
-  <div class="bottombtnbar">
+  <div class="bottombtnbar" v-show="flag">
     <mt-tabbar v-model="selected" class="tabbar" fixed :style="{height:height}">
       <mt-tab-item id="1" class="item">
         <img slot="icon" src="/img/1.png">
@@ -35,7 +35,8 @@ export default {
     return{
       selected:'1',
       height:'50px',
-      btn:'26px'
+      btn:'26px',
+      flag:true,
     }
   },
   mounted(){
@@ -54,6 +55,9 @@ export default {
       }
       if(location.pathname.slice(1)=='tenking'){
         this.selected = '2';
+      } 
+      if(/detail/.test(location.pathname)){
+        this.flag = false
       }
     })
   },
@@ -64,8 +68,14 @@ export default {
       }else if(newvalue=='2'){
         if(location.pathname.slice(1)=='tenking') return;
         this.$router.push('/tenking')
+      }  
+    },
+    $route(to){
+      if(/detail/.test(to.path)){
+        this.flag = false
+      }else{
+        this.flag = true
       }
-      
     }
   }
 }

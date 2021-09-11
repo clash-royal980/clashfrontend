@@ -85,7 +85,7 @@ export default {
   margin: 0 10px;
   padding: 0 10px;
   padding-top: 20px;
-  margin-bottom: 40px;
+  margin-bottom: 10vh;
 }
 .article .rich-content p{
   line-height: 1.7;

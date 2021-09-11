@@ -12,53 +12,106 @@
     <div class="gamecontent">
       <span>十大天王争霸赛</span>
       <!-- <span>赛程图</span> -->
-      <i style="color:#0284C5;position: absolute;right:0">赛程图</i>
+      <i style="color:#0284C5;position: absolute;right:0" @click="showpic">赛程图</i>
       <h5>
         <span style="position: absolute;left:0"></span>
-        <span style="position: absolute;left:0">上一周</span>
-        踢馆赛&冒泡赛W3
-        <span style="position: absolute;right:0">下一周</span>
+        <span style="position: absolute;left:0" @click="prev">上一周</span>
+        踢馆赛&冒泡赛{{tenkingpeople[0].game_type}}
+        <span style="position: absolute;right:0" @click="next">下一周</span>
         <span style="position: absolute;right:0"></span>
       </h5>
     </div>
     <div class="player">
-      <ul>
-        <li>
-          <div class="time">09-04</div>
-          <div class="fplay">
-            <img src="/img/tenking/people/1.png" alt="">
-            <span>Smuki</span>
+      <ul v-show="isshow">
+        <li v-for="(item,i) of tenkingpeople" :key="i">
+          <div class="time">{{item.play_time}}</div>
+          <div class="tplay">
+            <img :src="`${item.play1_pic}`" alt="">
+            <span>{{item.play1_name}}</span>
           </div>
           <div class="bifen">
-            <span>1 : 2</span>
+            <span>{{item.fen1}} : {{item.fen2}}</span>
           </div>
           <div class="tplay">
-            <img src="/img/tenking/people/2.png" alt="">
-            <span>guoyuan</span>
+            <img :src="`${item.play2_pic}`" alt="">
+            <span>{{item.play2_name}}</span>
           </div>
           <div class="xizb">
             <span>详细战报</span>
           </div>
         </li>
       </ul>
-    </div>
+      <img :src="`/img/tenking/${picid}.jpg`" alt="" v-show="!isshow">
+    </div>  
   </div>
 </template>
 <script>
 export default {
   data(){
     return{
-      zom:1
+      zom:1,
+      isshow:true,
+      tenkingpeople:[{game_type:'W3'}],
+      type:'W3',
+      picid:4
+    }
+  },
+  methods: {
+    showpic(){
+      if(this.isshow==true){
+        this.isshow = false
+      }else{
+        this.isshow = true
+      }
+    },
+    prev(){
+      if(this.type=='W3'){
+        this.type = 'W2'
+        this.picid = 3
+      }else if(this.type=='W2'){
+        this.type = 'W1'
+        this.picid = 2
+      }else if(this.type=='W1'){
+        this.type = 'W0'
+        this.picid = 1
+      }
+    },
+    next(){
+      if(this.type=='W0'){
+        this.type = 'W1'
+        this.picid = 2
+      }else if(this.type=='W1'){
+        this.type = 'W2'
+        this.picid = 3
+      }else if(this.type=='W2'){
+        this.type = 'W3'
+        this.picid = 4
+      }
     }
   },
   mounted() {
     let screenh = window.screen.width;
     let suan = screenh/667;
     this.zom = suan;
+    this.axios.get(`/tenkingpk?type=${this.type}`).then(result=>{
+      console.log(result);
+      this.tenkingpeople=result.data.results
+    })
   },
+  watch:{
+    type(newvaule){
+      this.axios.get(`/tenkingpk?type=${newvaule}`).then(result=>{
+        console.log(result);
+        this.tenkingpeople=result.data.results
+      })
+    }
+  }
 }
 </script>
 <style>
+.tenkinggame{
+  margin-bottom: 5vh;
+}
 .tenkinggame .toppic{
   position: relative;
 }
@@ -75,6 +128,7 @@ export default {
   left: 50%;
   transform: translateX(-60%);
 }
+
 .tenkinggame .gametitle img{
     position: absolute;
 }
@@ -97,6 +151,7 @@ export default {
   margin: 0 auto;
   width: 90%;
   border: 1px solid black;
+  border-bottom: 0;
   border-top: 0;
   text-align: center; 
 }
@@ -124,14 +179,28 @@ export default {
   margin: 0 auto;
   width: 90%;
   border-bottom: 1px solid #ddd;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 .tenkinggame .player ul li{
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   text-align: center;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+  margin: 0 2vw;
 }
-
-
+.tenkinggame .player ul li:last-child{
+  border-bottom: 0;
+}
+.tenkinggame .player ul li .xizb{
+      color: #0284c5;
+}
+.tenkinggame .player>img{
+  width: 90%;
+  display: block;
+  margin: 0 auto;
+}
 
 /* 媒体查询 */
 @media screen and (min-width:280px) {
@@ -175,6 +244,19 @@ export default {
     .tenkinggame .gamecontent h5 span:nth-child(3){
       margin-right: 15px;
     }
+    .tenkinggame .player ul li{
+      height: 53.6px;
+      font-size: 12px;
+    } 
+    .tenkinggame .player ul li img{
+      width: 18px;
+    }
+    .tenkinggame .player ul li .tplay{
+      display: flex;
+      justify-content: center;
+      width: 20px;
+      flex-wrap: wrap;
+    }
 }
 @media screen and (min-width:320px) {
     .tenkinggame .gametitle{
@@ -195,7 +277,6 @@ export default {
       font-size: 14px;
   }
 }
-
 @media screen and (min-width:360px) {
     .tenkinggame .gametitle{
       width: 120px;
@@ -213,35 +294,6 @@ export default {
     }
     .tenkinggame .gamecontent>span{
       font-size: 16.5px;
-    }
-    .tenkinggame .player ul li{
-      height: 53.6px;
-    }
-    .tenkinggame .player ul li .time{
-      font-size: 12px;
-      line-height: 53.6px;
-      margin-right: 15px;
-    }
-    .tenkinggame .player ul li .xizb{
-      font-size: 12px;
-      line-height: 53.6px;
-      margin-left: 18px;
-      color: #0284c5;
-    }
-    .tenkinggame .player ul li img{
-      width: 18px;
-      margin-top: 10px;
-    }
-    .tenkinggame .player ul li .bifen{
-      margin-top: 18px;
-    }
-    .tenkinggame .player ul li .fplay{
-      width: 50px;
-      font-size: 14px;
-    }
-    .tenkinggame .player ul li .tplay{
-      width: 50px;
-      font-size: 14px;
     }
 }
 
@@ -277,6 +329,19 @@ export default {
       margin-top: 10px;
       margin-right: 6px;
   }
+  .tenkinggame .player ul li{
+      height: 61.27px;
+      font-size: 14px;
+    }
+    .tenkinggame .player ul li img{
+      width: 20px;
+    }
+    .tenkinggame .player ul li .tplay{
+      display: flex;
+      justify-content: center;
+      width: 22px;
+      flex-wrap: wrap;
+    }
 }
 
 @media screen and (min-width:480px) {
@@ -343,6 +408,19 @@ export default {
     }
   .tenkinggame .gamecontent h5 span:nth-child(3){
       margin-right: 30px;
+    }
+    .tenkinggame .player ul li{
+      height: 110px;
+      font-size: 25px;
+    }
+    .tenkinggame .player ul li img{
+      width: 35px;
+    }
+    .tenkinggame .player ul li .tplay{
+      display: flex;
+      justify-content: center;
+      width: 35px;
+      flex-wrap: wrap;
     }
 }
 @media screen and (min-width:1024px) {
