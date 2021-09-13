@@ -56,61 +56,25 @@
             </div>
             <div class="cardrank">
               <ul>
-                <li>
-                  <div class="rank">1</div>
+                <li v-for="(item,index) of tenkingcard" :key="index">
+                  <div class="rank">{{index+1}}</div>
                   <div class="right">
-                    <div class="card">
-                      <img src="/img/tenking/card/68.png" alt="">
+                    <div class="card" v-html="item.card_content">
+                      <!-- <img src="/img/tenking/card/68.png" alt="">
                       <img src="/img/tenking/card/11.png" alt="">
                       <img src="/img/tenking/card/5.png" alt="">
                       <img src="/img/tenking/card/2.png" alt="">
                       <img src="/img/tenking/card/81.png" alt="">
                       <img src="/img/tenking/card/15.png" alt="">
                       <img src="/img/tenking/card/7.png" alt="">
-                      <img src="/img/tenking/card/1.png" alt="">
+                      <img src="/img/tenking/card/1.png" alt=""> -->
                     </div>
                     <div class="info">
-                      <p>胜率：100%</p>
-                      <p>登场数:4</p>
-                      <p>场均皇冠数:1.0</p>
+                      <p>胜率：{{item.card_sl*100}}%</p>
+                      <p>登场数:{{item.card_dcs}}</p>
+                      <p>场均皇冠数:{{item.card_hgs}}</p>
                     </div>
                   </div>
-                </li>
-                <li>
-                  <div class="rank">2</div>
-                  <div class="right">胜率</div>
-                </li>
-                <li>
-                  <div class="rank">3</div>
-                  <div class="right">胜率</div>
-                </li>
-                <li>
-                  <div class="rank">4</div>
-                  <div class="right">胜率</div>
-                </li>
-                <li>
-                  <div class="rank">5</div>
-                  <div class="right">胜率</div>
-                </li>
-                <li>
-                  <div class="rank">6</div>
-                  <div class="right">胜率</div>
-                </li>
-                <li>
-                  <div class="rank">7</div>
-                  <div class="right">胜率</div>
-                </li>
-                <li>
-                  <div class="rank">8</div>
-                  <div class="right">胜率</div>
-                </li>
-                <li>
-                  <div class="rank">9</div>
-                  <div class="right">胜率</div>
-                </li>
-                <li>
-                  <div class="rank">10</div>
-                  <div class="right">胜率</div>
                 </li>
               </ul>
                 <div class="first"><span>1</span></div>
@@ -132,12 +96,14 @@ export default {
       zom:1,
       active:'1',
       tenkingdata:[],
+      tenkingcard:[],
       issl:{sheng:true,active:true},
       slg:{shengpic:true,active:true},
       isdcs:{dzj:true,active:false},
       dcs:{dzjpic:true,active:false},
       ishgs:{pjhs:true,active:false},
       hgs:{pjhspic:true,active:false},
+      type:'card_sl'
     }
   },
   methods: {
@@ -148,6 +114,7 @@ export default {
       this.dcs.active=false;
       this.ishgs.active=false;
       this.hgs.active=false;
+      this.type='card_sl';
     },
     changdcs(){
       this.issl.active=false;
@@ -156,6 +123,7 @@ export default {
       this.dcs.active=true;
       this.ishgs.active=false;
       this.hgs.active=false;
+      this.type='card_dcs';
     },
     changehgs(){
       this.issl.active=false;
@@ -164,6 +132,7 @@ export default {
       this.dcs.active=false;
       this.ishgs.active=true;
       this.hgs.active=true;
+      this.type='card_hgs';
     }
   },
    mounted() {
@@ -174,10 +143,23 @@ export default {
       console.log(result);
       this.tenkingdata=result.data.results
     })
+    this.axios.get(`/tenkingcard?type=card_sl`).then(result=>{
+      console.log(result);
+      this.tenkingcard=result.data.results
+    })
     this.$nextTick(()=>{
       var first = document.querySelector('.tenkingsj .cardsj table tbody:first-child tr:first-child td')
     })
    },
+   watch:{
+     type(newvalue){
+       this.axios.get(`/tenkingcard?type=${newvalue}`).then(result=>{
+        console.log(result);
+        this.tenkingcard=result.data.results
+        console.log(this.tenkingcard);
+      })
+     }
+   }
 }
 </script>
 <style>
