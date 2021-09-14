@@ -194,6 +194,9 @@ export default {
 
 /* 媒体查询 */
 @media screen and (min-width:280px) {
+  .battlepage .mint-button-icon .mintui{
+      font-size: 16px;
+  }
   .battlepage .battelcontent .battlevs .score{
     height: 80px;
   }
@@ -467,6 +470,9 @@ export default {
 }
 
 @media screen and (min-width:480px) {
+  .battlepage .mint-button-icon .mintui{
+      font-size: 25px;
+  }
   .battlepage .battelcontent .battlevs .score{
     height: 160px;
   }
@@ -533,6 +539,9 @@ export default {
 }
 
 @media screen and (min-width:640px) {
+  .battlepage .mint-button-icon .mintui{
+      font-size: 35px;
+  }
   .battlepage .battelcontent .battlevs .score{
     height: 222px;
   }

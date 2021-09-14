@@ -101,4 +101,15 @@ export default {
 .article .rich-content .subtime{
   font-size: .5rem;
 }
+
+@media screen and (min-width:280px) {
+  .article .mint-button-icon .mintui{
+    font-size: 16px;
+  }
+}
+@media screen and (min-width:540px){
+  .article .mint-button-icon .mintui{
+    font-size: 25px;
+  }
+}
 </style>
