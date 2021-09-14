@@ -59,6 +59,9 @@ export default {
       if(/detail/.test(location.pathname)){
         this.flag = false
       }
+      if(/battle/.test(location.pathname)){
+        this.flag = false
+      }
     })
   },
   watch:{
@@ -71,7 +74,7 @@ export default {
       }  
     },
     $route(to){
-      if(/detail/.test(to.path)){
+      if(/detail/.test(to.path)||/battle/.test(to.path)){
         this.flag = false
       }else{
         this.flag = true

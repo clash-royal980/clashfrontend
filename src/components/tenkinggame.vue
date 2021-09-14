@@ -37,7 +37,7 @@
             <span>{{item.play2_name}}</span>
           </div>
           <div class="xizb">
-            <span>详细战报</span>
+            <router-link :to="`/battle?id=${item.id}`"><span>详细战报</span></router-link>
           </div>
         </li>
       </ul>
@@ -193,8 +193,8 @@ export default {
 .tenkinggame .player ul li:last-child{
   border-bottom: 0;
 }
-.tenkinggame .player ul li .xizb{
-      color: #0284c5;
+.tenkinggame .player ul li .xizb span{
+  color: #0284c5;
 }
 .tenkinggame .player>img{
   width: 90%;

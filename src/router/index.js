@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Index from '../views/Index.vue'
 import Detail from '../views/detail.vue'
 import TenKing from '../views/tenKing.vue'
+import Battle from '../views/battle.vue'
 
 Vue.use(VueRouter)
 
@@ -21,6 +22,11 @@ const routes = [
     path: '/tenking',
     name: 'TenKing',
     component: TenKing
+  },
+  {
+    path: '/battle',
+    name: 'Battle',
+    component: Battle
   },
 ]
 
