@@ -55,7 +55,10 @@ export default {
       }
       if(location.pathname.slice(1)=='tenking'){
         this.selected = '2';
-      } 
+      }
+      if(location.pathname.slice(1)=='myguess'){
+        this.selected = '5';
+      }
       if(/detail/.test(location.pathname)){
         this.flag = false
       }
@@ -71,7 +74,11 @@ export default {
       }else if(newvalue=='2'){
         if(location.pathname.slice(1)=='tenking') return;
         this.$router.push('/tenking')
-      }  
+      }
+      else if(newvalue=='5'){
+        if(location.pathname.slice(1)=='myguess') return;
+        this.$router.push('/myguess')
+      } 
     },
     $route(to){
       if(/detail/.test(to.path)||/battle/.test(to.path)){

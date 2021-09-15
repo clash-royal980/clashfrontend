@@ -94,7 +94,7 @@ export default {
   data(){
     return{
       zom:1,
-      active:'1',
+      active:'0',
       tenkingdata:[],
       tenkingcard:[],
       issl:{sheng:true,active:true},
