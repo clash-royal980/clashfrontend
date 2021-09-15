@@ -10,18 +10,18 @@
     <ul>
       <li>
         <img src="/img/myguess/guing.png" alt="">
-        <p><router-link to="/guessdetail">本赛季个人冠军会属于哪个赛区？</router-link></p>
-        <img src="/img/myguess/goguess.png" alt="" @click="todetail">
+        <p><router-link to="/guessdetail?id=1">本赛季个人冠军会属于哪个赛区？</router-link></p>
+        <img src="/img/myguess/goguess.png" alt="" @click="todetail(1)">
       </li>
       <li>
         <img src="/img/myguess/guing.png" alt="">
-        <p><router-link to="/guessdetail">本赛季哪个赛区会获得团体赛冠军？</router-link></p>
-        <img src="/img/myguess/goguess.png" alt="" @click="todetail">
+        <p><router-link to="/guessdetail?id=2">本赛季哪个赛区会获得团体赛冠军？</router-link></p>
+        <img src="/img/myguess/goguess.png" alt="" @click="todetail(2)">
       </li>
       <li>
-        <img src="/img/myguess/guing.png" alt="" @click="todetail">
-        <p><router-link to="/guessdetail">谁将成为CRL本月月度决赛冠军？</router-link></p>
-        <img src="/img/myguess/goguess.png" alt="" @click="todetail">
+        <img src="/img/myguess/guing.png" alt="">
+        <p><router-link to="/guessdetail?id=3">谁将成为CRL本月月度决赛冠军？</router-link></p>
+        <img src="/img/myguess/goguess.png" alt="" @click="todetail(3)">
       </li>
     </ul>
   </div>
@@ -33,8 +33,8 @@ export default {
     guesstop
   },
   methods: {
-    todetail(){
-      this.$router.push('/guessdetail')
+    todetail(i){
+      this.$router.push(`/guessdetail?id=${i}`)
     }
   },
 }
