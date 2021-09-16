@@ -29,7 +29,7 @@
                 percentage="70" stroke-width="8"  pivot-text="" color="#FF9306" track-color="#666"/>
               </div>
               <div class="xzpic">
-                <img src="/img/myguess/xiazhu.png" alt="">
+                <img src="/img/myguess/xiazhu.png" alt="" @click="islogin">
               </div>
           </div>
           <div class="xiazhu">
@@ -39,7 +39,7 @@
                 percentage="25" stroke-width="8"  pivot-text="" color="#FF9306" track-color="#666"/>
               </div>
               <div class="xzpic">
-                <img src="/img/myguess/xiazhu.png" alt="">
+                <img src="/img/myguess/xiazhu.png" alt="" @click="islogin">
               </div>
           </div>
           <div class="xiazhu">
@@ -49,7 +49,7 @@
                 percentage="10" stroke-width="8"  pivot-text="" color="#FF9306" track-color="#666"/>
               </div>
               <div class="xzpic">
-                <img src="/img/myguess/xiazhu.png" alt="">
+                <img src="/img/myguess/xiazhu.png" alt="" @click="islogin">
               </div>
           </div>
           <div class="xiazhu">
@@ -59,7 +59,7 @@
                 percentage="5" stroke-width="8"  pivot-text="" color="#FF9306" track-color="#666"/>
               </div>
               <div class="xzpic">
-                <img src="/img/myguess/xiazhu.png" alt="">
+                <img src="/img/myguess/xiazhu.png" alt="" @click="islogin">
               </div>
           </div>
         </div>
@@ -78,7 +78,7 @@
                 percentage="65" stroke-width="8"  pivot-text="" color="#FF9306" track-color="#666"/>
               </div>
               <div class="xzpic">
-                <img src="/img/myguess/xiazhu.png" alt="">
+                <img src="/img/myguess/xiazhu.png" alt="" @click="islogin">
               </div>
           </div>
           <div class="xiazhu">
@@ -88,7 +88,7 @@
                 percentage="20" stroke-width="8"  pivot-text="" color="#FF9306" track-color="#666"/>
               </div>
               <div class="xzpic">
-                <img src="/img/myguess/xiazhu.png" alt="">
+                <img src="/img/myguess/xiazhu.png" alt="" @click="islogin">
               </div>
           </div>
           <div class="xiazhu">
@@ -98,7 +98,7 @@
                 percentage="20" stroke-width="8"  pivot-text="" color="#FF9306" track-color="#666"/>
               </div>
               <div class="xzpic">
-                <img src="/img/myguess/xiazhu.png" alt="">
+                <img src="/img/myguess/xiazhu.png" alt="" @click="islogin">
               </div>
           </div>
           <div class="xiazhu">
@@ -108,7 +108,7 @@
                 percentage="5" stroke-width="8"  pivot-text="" color="#FF9306" track-color="#666"/>
               </div>
               <div class="xzpic">
-                <img src="/img/myguess/xiazhu.png" alt="">
+                <img src="/img/myguess/xiazhu.png" alt="" @click="islogin">
               </div>
           </div>
         </div>
@@ -127,7 +127,7 @@
                 percentage="40" stroke-width="8"  pivot-text="" color="#FF9306" track-color="#666"/>
               </div>
               <div class="xzpic">
-                <img src="/img/myguess/xiazhu.png" alt="">
+                <img src="/img/myguess/xiazhu.png" alt="" @click="islogin">
               </div>
           </div>
           <div class="xiazhu">
@@ -137,7 +137,7 @@
                 percentage="35" stroke-width="8"  pivot-text="" color="#FF9306" track-color="#666"/>
               </div>
               <div class="xzpic">
-                <img src="/img/myguess/xiazhu.png" alt="">
+                <img src="/img/myguess/xiazhu.png" alt="" @click="islogin">
               </div>
           </div>
           <div class="xiazhu">
@@ -147,7 +147,7 @@
                 percentage="25" stroke-width="8"  pivot-text="" color="#FF9306" track-color="#666"/>
               </div>
               <div class="xzpic">
-                <img src="/img/myguess/xiazhu.png" alt="">
+                <img src="/img/myguess/xiazhu.png" alt="" @click="islogin">
               </div>
           </div>
           <div class="xiazhu">
@@ -157,7 +157,7 @@
                 percentage="0" stroke-width="8"  pivot-text="" color="#FF9306" track-color="#666"/>
               </div>
               <div class="xzpic">
-                <img src="/img/myguess/xiazhu.png" alt="">
+                <img src="/img/myguess/xiazhu.png" alt="" @click="islogin">
               </div>
           </div>
           <div class="xiazhu">
@@ -167,7 +167,7 @@
                 percentage="4" stroke-width="8"  pivot-text="" color="#FF9306" track-color="#666"/>
               </div>
               <div class="xzpic">
-                <img src="/img/myguess/xiazhu.png" alt="">
+                <img src="/img/myguess/xiazhu.png" alt="" @click="islogin">
               </div>
           </div>
           <div class="xiazhu">
@@ -177,7 +177,7 @@
                 percentage="4" stroke-width="8"  pivot-text="" color="#FF9306" track-color="#666"/>
               </div>
               <div class="xzpic">
-                <img src="/img/myguess/xiazhu.png" alt="">
+                <img src="/img/myguess/xiazhu.png" alt="" @click="islogin">
               </div>
           </div>
           <div class="xiazhu">
@@ -187,7 +187,7 @@
                 percentage="8" stroke-width="8"  pivot-text="" color="#FF9306" track-color="#666"/>
               </div>
               <div class="xzpic">
-                <img src="/img/myguess/xiazhu.png" alt="">
+                <img src="/img/myguess/xiazhu.png" alt="" @click="islogin">
               </div>
           </div>
           <div class="xiazhu">
@@ -197,11 +197,21 @@
                 percentage="12" stroke-width="8"  pivot-text="" color="#FF9306" track-color="#666"/>
               </div>
               <div class="xzpic">
-                <img src="/img/myguess/xiazhu.png" alt="">
+                <img src="/img/myguess/xiazhu.png" alt="" @click="islogin">
               </div>
           </div>
         </div>
       </div>
+      <van-popup v-model="show">
+        <div class="mypop">
+          <div class="title"><p>请输入游戏信息</p></div>
+          <div class="content"><p>您需要登录后才能下注</p></div>
+          <div class="btns">
+            <div class="btn2" @click="gologin">前往登录</div>
+            <div class="btn1" @click="quxiao">取消</div>
+          </div>
+        </div>
+      </van-popup>
   </div>
 </template>
 <script>
@@ -216,7 +226,19 @@ export default {
       djs: '',
       djs2:'',
       djs3:'',
-      id:1
+      id:1,
+      show:false
+    }
+  },
+  methods: {
+    islogin(){
+      this.show = true
+    },
+    quxiao(){
+      this.show = false
+    },
+    gologin(){
+      this.$router.push('/myguess')
     }
   },
   mounted(){
@@ -240,6 +262,50 @@ export default {
 <style>
 .guessdetail .mint-header{
   background-color: transparent;
+}
+.guessdetail .van-popup{
+  width: 325px;
+  height: 164px;
+  border-radius: 8px;
+  background-color: #636A7C;
+  color: #fff;
+}
+.guessdetail .van-popup .mypop p{
+  text-align: center;
+  margin-top: 1vh;
+  font-size: 14.3px;
+}
+.guessdetail .van-popup .mypop .content p{
+  text-align: center;
+  margin-top: 5vh;
+  font-size: 15px;
+}
+.guessdetail .van-popup .btns{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin-top: 5vh;
+}
+.guessdetail .van-popup .btns .btn1{
+  width: 190px;
+  height: 80px;
+  background-image: url(/img/btn.png);
+  zoom: .5; 
+  text-align: center;
+  line-height: 90px;
+  color: #000;
+  font-size: 25px;
+}
+.guessdetail .van-popup .btns .btn2{
+  width: 190px;
+  height: 80px;
+  background-image: url(/img/btn.png);
+  background-position: 0 -85px;
+  zoom: .5;
+  text-align: center;
+  line-height: 90px;
+  color: #000;
+  font-size: 25px;
 }
 .guessdetail .warning{
   position: absolute;
@@ -290,7 +356,7 @@ export default {
   margin-top: 4vh;
 }
 .guessdetail .gsdetail .lasttime .xiazhu .content{
-  width: 60%;
+  width: 60%; 
 }
 .guessdetail .gsdetail .lasttime .xiazhu .content p{
   text-align: left;
@@ -310,11 +376,31 @@ export default {
     font-size: 12px;
     zoom: .7;
   }
+  .guessdetail .gsdetail .title p{
+    font-size: 12px;
+  }
+  .guessdetail .gsdetail .lasttime{
+    font-size: 12px;
+    zoom: .8;
+  }
+  .guessdetail .gsdetail .lasttime .xiazhu .xzpic img{
+    width: 46px;
+  }
 }
 @media screen and (min-width:320px){  
   .guessdetail .warning p{
     font-size: 12px;
     zoom: .8;
+  }
+  .guessdetail .gsdetail .title p{
+    font-size: 12.5px;
+  }
+  .guessdetail .gsdetail .lasttime{
+    font-size: 12.5px;
+    zoom: .9;
+  }
+  .guessdetail .gsdetail .lasttime .xiazhu .xzpic img{
+    width: 50px;
   }
 }
 @media screen and (min-width:360px){  
@@ -322,25 +408,84 @@ export default {
     font-size: 12px;
     zoom: 1;
   }
+  .guessdetail .gsdetail .title p{
+    font-size: 12.5px;
+  }
+  .guessdetail .gsdetail .lasttime{
+    font-size: 12.5px;
+    zoom: 1;
+  }
+  .guessdetail .gsdetail .lasttime .xiazhu .xzpic img{
+    width: 63px;
+  }
 }
 @media screen and (min-width:410px){  
   .guessdetail .warning p{
     font-size: 13px;
+  }
+  .guessdetail .gsdetail{
+    height:380px;
+  }
+  .guessdetail .gsdetail .title p{
+    font-size: 12.5px;
+  }
+  .guessdetail .gsdetail .lasttime{
+    font-size: 12.5px;
+    zoom: 1;
+  }
+  .guessdetail .gsdetail .lasttime .xiazhu .xzpic img{
+    width: 63px;
   }
 }
 @media screen and (min-width:540px){  
   .guessdetail .warning p{
     font-size: 17px;
   }
+  .guessdetail .gsdetail{
+    height:380px;
+  }
+  .guessdetail .gsdetail .title p{
+    font-size: 14px;
+  }
+  .guessdetail .gsdetail .lasttime{
+    font-size: 14px;
+  }
+  .guessdetail .gsdetail .lasttime .xiazhu .xzpic img{
+    width: 72px;
+  }
 }
 @media screen and (min-width:760px){  
   .guessdetail .warning p{
     font-size: 24px;
   }
+  .guessdetail .gsdetail{
+    height:480px;
+  }
+  .guessdetail .gsdetail .title p{
+    font-size: 20px;
+  }
+  .guessdetail .gsdetail .lasttime{
+    font-size: 20px;
+  }
+  .guessdetail .gsdetail .lasttime .xiazhu .xzpic img{
+    width: 80px;
+  }
 }
 @media screen and (min-width:1000px){  
   .guessdetail .warning p{
     font-size: 30px;
+  }
+  .guessdetail .gsdetail{
+    height:550px;
+  }
+  .guessdetail .gsdetail .title p{
+    font-size: 24px;
+  }
+  .guessdetail .gsdetail .lasttime{
+    font-size: 24px;
+  }
+  .guessdetail .gsdetail .lasttime .xiazhu .xzpic img{
+    width: 90px;
   }
 }
 </style>

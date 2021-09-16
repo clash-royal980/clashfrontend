@@ -6,6 +6,8 @@ import TenKing from '../views/tenKing.vue'
 import Battle from '../views/battle.vue'
 import Myguess from '../views/myguess.vue'
 import Guessdetail from '../views/guessdetail.vue'
+import Login from '../views/login.vue'
+import Register from '../views/register.vue'
 
 Vue.use(VueRouter)
 
@@ -39,6 +41,16 @@ const routes = [
     path: '/guessdetail',
     name: 'Guessdetail',
     component: Guessdetail
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: Register
   },
 ]
 

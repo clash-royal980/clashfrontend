@@ -65,6 +65,12 @@ export default {
       if(/battle/.test(location.pathname)){
         this.flag = false
       }
+      if(/login/.test(location.pathname)){
+        this.flag = false
+      }
+      if(/register/.test(location.pathname)){
+        this.flag = false
+      }
     })
   },
   watch:{
@@ -81,10 +87,13 @@ export default {
       } 
     },
     $route(to){
-      if(/detail/.test(to.path)||/battle/.test(to.path)){
+      if(/detail/.test(to.path)||/battle/.test(to.path)||/login/.test(to.path)||/register/.test(to.path)){
         this.flag = false
       }else{
         this.flag = true
+      }
+      if(/myguess/.test(to.path)){
+        this.selected = '5'
       }
     }
   }

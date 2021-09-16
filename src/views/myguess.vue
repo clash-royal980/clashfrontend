@@ -3,7 +3,7 @@
     <guesstop>
       <div class="userinfo">
         <img src="/img/myguess/user.png" alt="">
-        <p>您还未登录<br>请先<span>登录</span></p>
+        <p>您还未登录<br>请先<span @click="gologin">登录</span></p>
         <span></span>
       </div>
     </guesstop>
@@ -35,6 +35,9 @@ export default {
   methods: {
     todetail(i){
       this.$router.push(`/guessdetail?id=${i}`)
+    },
+    gologin(){
+      this.$router.push(`/login`)
     }
   },
 }
