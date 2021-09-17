@@ -16,6 +16,9 @@ export default new Vuex.Store({
     changephone(state,newphone){
       state.islogin = true;
       state.userphone = newphone;
+    },
+    changelogin(state){
+      state.islogin = false;
     }
   },
   actions: {

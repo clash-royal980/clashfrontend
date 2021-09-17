@@ -9,8 +9,24 @@
     </guesstop>
     <guesstop v-else>
       <div class="usermsg">
-        
+        <img :src="userinfo.toppic" alt="">
+        <div class="text">
+          <p>{{userinfo.username}}</p>
+          <p>
+            <img src="/img/gold.png" alt="">
+            <span>皇豆:{{userinfo.goldmoney}}</span>
+          </p>
+          <p>
+            <img src="/img/guan.png" alt="">
+            <span>竞猜胜率:{{(userinfo.winlose*100).toFixed(2)}}%</span>
+          </p>
+        </div>
       </div>
+      <div class="setting">
+        <img src="/img/set.png" alt="">
+      </div>
+      <span class="close" @click="notlogin">退出</span>
+      <div class="shop"></div>
     </guesstop>
     <ul>
       <li>
@@ -39,7 +55,7 @@ export default {
   },
   data(){
     return{
-      
+      userinfo:{}
     }
   },
   methods: {
@@ -48,19 +64,27 @@ export default {
     },
     gologin(){
       this.$router.push(`/login`)
+    },
+    notlogin(){
+      sessionStorage.removeItem('islogin');
+      sessionStorage.removeItem('userphone');
+      this.$store.commit('changelogin');
     }
   },
   mounted() {
-    console.log(this.$store.state.userphone);
-    // this.axios.get(`selectuser?phone=${this.$store.state.userphone}`).then(result=>{
-    //   console.log(result);
-    // })
+    console.log(this.$store.state.islogin);
+    this.axios.get(`selectuser?phone=${this.$store.state.userphone}`).then(result=>{
+      // console.log(result.data.result[0]);
+      this.userinfo = result.data.result[0]
+    })
   },
 }
 </script>
 <style>
 .myguess{
   margin-bottom: 10vh;
+  position: relative;
+  overflow: hidden;
 }
 .myguess .userinfo{
   position: absolute;
@@ -70,14 +94,76 @@ export default {
   justify-content: center;
   align-items: center;
 }
+.myguess .usermsg{
+  position: absolute;
+  top: 30%;
+  left: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.myguess .text{
+  margin-left: 2vw;
+}
+.myguess .setting img{
+  width: 1rem;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transform: translate(-100%,200%);
+}
+.myguess .close{
+  font-size: .9rem;
+  position: absolute;
+  right: 5%;
+  top: 40%;
+}
+.myguess .text p:first-child{
+  color: #fff;
+  font-size: .9rem;
+  
+}
+.myguess .usermsg>img{
+  width: 3.2rem;
+  background-color: #DFF1FF;
+  border-radius: 5px;
+}
+.myguess .text p:nth-child(n+2){
+  font-size: .8rem;
+  color: #d7c258;
+  display: flex;
+  /* width: 1.5rem; */
+}
+.myguess .text p:last-child{
+  color: black;
+  
+}
+.myguess .text p:nth-child(n+2) img{
+  width: 1.2rem;
+  margin: 0;
+  vertical-align: middle;
+}
+.myguess .shop{
+  height: 3rem;
+  width: 15rem;
+  /* width: 500px; */
+  /* height: 500px; */
+  background-image: url(/img/shop.png);
+  background-position: -120px -990px;
+  position: absolute;
+  top: 68%;
+  left: 55%;
+  margin-top: .5rem;
+  zoom: .4;
+}
 .myguess .userinfo img{
-  width: 45px;
+  width: 3rem;
   border-radius: 5px;
   border: 1px solid #87B4D5;
   display: block;
 }
 .myguess .userinfo p{
-  font-size: 13px;
+  font-size: .9rem;
   text-align: center;
   color: #fff;
   margin-left: 1vw;
@@ -138,6 +224,9 @@ export default {
   .myguess ul li img:last-child{
     width: 60px;
   }
+  .myguess .shop{
+    zoom: .3;
+  }
 }
 @media screen and (min-width:320px){  
   .myguess .userinfo img{
@@ -157,6 +246,9 @@ export default {
   }
   .myguess ul li img:last-child{
     width: 80px;
+  }
+  .myguess .shop{
+    zoom: .35;
   }
 }
 @media screen and (min-width:360px){  
@@ -198,6 +290,9 @@ export default {
   .myguess ul li img:last-child{
     width: 90px;
   }
+  .myguess .shop{
+    zoom: .4;
+  }
 }
 @media screen and (min-width:540px){  
   .myguess .userinfo img{
@@ -217,6 +312,9 @@ export default {
   }
   .myguess ul li img:last-child{
     width: 100px;
+  }
+  .myguess .shop{
+    zoom: .5;
   }
 }
 @media screen and (min-width:760px){  
@@ -238,6 +336,12 @@ export default {
   .myguess ul li img:last-child{
     width: 150px;
   }
+  .myguess .shop{
+    zoom: .9;
+    height: 1.5rem;
+    transform: translateY(1.4rem);
+    top: 5rem;
+  }
 }
 @media screen and (min-width:1000px){  
   .myguess .userinfo img{
@@ -257,6 +361,12 @@ export default {
   }
   .myguess ul li img:last-child{
     width: 170px;
+  }
+  .myguess .shop{
+    zoom: 1;
+    height: 1.5rem;
+    transform: translateY(1rem);
+    top: 5rem;
   }
 }
 </style>
