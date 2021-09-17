@@ -1,10 +1,15 @@
 <template>
   <div class="myguess">
-    <guesstop>
+    <guesstop  v-if="!$store.state.islogin">
       <div class="userinfo">
         <img src="/img/myguess/user.png" alt="">
         <p>您还未登录<br>请先<span @click="gologin">登录</span></p>
         <span></span>
+      </div>
+    </guesstop>
+    <guesstop v-else>
+      <div class="usermsg">
+        
       </div>
     </guesstop>
     <ul>
@@ -32,6 +37,11 @@ export default {
   components: {
     guesstop
   },
+  data(){
+    return{
+      
+    }
+  },
   methods: {
     todetail(i){
       this.$router.push(`/guessdetail?id=${i}`)
@@ -39,6 +49,12 @@ export default {
     gologin(){
       this.$router.push(`/login`)
     }
+  },
+  mounted() {
+    console.log(this.$store.state.userphone);
+    // this.axios.get(`selectuser?phone=${this.$store.state.userphone}`).then(result=>{
+    //   console.log(result);
+    // })
   },
 }
 </script>

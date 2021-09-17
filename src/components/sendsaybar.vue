@@ -3,7 +3,7 @@
       <input type="text" placeholder="请输入您的评论" @focus="islogin">
       <div class="send" @click="islogin">1</div>
       <div class="icon"></div>
-      <van-popup v-model="show">
+      <van-popup v-model="show"  v-if="!$store.state.islogin">
         <div class="mypop">
           <div class="title"><p>请输入游戏信息</p></div>
           <div class="content"><p>您需要登录后才能评论</p></div>

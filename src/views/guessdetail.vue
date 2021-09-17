@@ -202,7 +202,7 @@
           </div>
         </div>
       </div>
-      <van-popup v-model="show">
+      <van-popup v-model="show" v-if="!$store.state.islogin">
         <div class="mypop">
           <div class="title"><p>请输入游戏信息</p></div>
           <div class="content"><p>您需要登录后才能下注</p></div>

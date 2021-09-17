@@ -9,11 +9,11 @@
     </header>
     <div class="userlogin">
       <span>账号:</span>
-      <input type="text" placeholder="请输入注册时的手机号">
-      <input type="password" placeholder="请输入密码">
+      <input type="text" placeholder="请输入注册时的手机号" v-model="pname">
+      <input type="password" placeholder="请输入密码" v-model="pwd">
       <span>密码:</span>
     </div>
-    <div class="loginbtn">
+    <div class="loginbtn" @click="godo">
       <div class="bgpic"></div>
       <span>登录</span>
     </div>
@@ -27,12 +27,31 @@
 export default {
   data(){
     return{
-
+      pname:'',
+      pwd:''
     }
   },
   methods: {
     goregister(){
       this.$router.push('/register')
+    },
+    godo(){
+      this.axios.post(
+        '/userlogin',`pho=${this.pname}&pwd=${this.pwd}`).then(result=>{
+        console.log(result);
+        if(result.data.code==100){
+          this.$toast('用户名或密码错误');
+          this.pname='';
+          this.pwd='';
+          return;
+        }else{
+          this.$toast('登录成功');
+          this.$store.commit('changephone',this.pname);
+          sessionStorage.setItem('islogin',true);
+          sessionStorage.setItem('userphone',this.pname)
+          this.$router.push('/myguess')
+        }
+      })
     }
   },
 }

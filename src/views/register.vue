@@ -18,22 +18,21 @@
       <span>密码:</span>
       <span>重复密码:</span>
       <span>验证码:</span>
-      <input type="text" placeholder="请输入手机号">
-      <input type="password" placeholder="请输入密码">
-      <input type="password" placeholder="请输入重复密码">
+      <input type="text" placeholder="请输入11位手机号" v-model="pho">
+      <input type="password" placeholder="必须为数字6-15位" v-model="pwd">
+      <input type="password" placeholder="与上次输入密码相同" v-model="pwdag">
       <div class="yzm">
-        <input type="text" placeholder="请输入验证码">
+        <input type="text" placeholder="请输入验证码"  v-model="yzm">
         <!-- <img :src="src" alt="" @click="changpic"> -->
         <div v-html="datapic" class="data" @click="changpic"></div>
       </div>
-      
     </div>
     <div class="agree">
       <input type="checkbox" id="mycheck" checked @click="select">
       <label for="mycheck">同意</label>
       <span @click="showreg">《用户注册条款》</span>
     </div>
-    <div :class="list">
+    <div :class="list" @click="usereg">
       <div class="bgpic"></div>
       <span>确认</span>
     </div>
@@ -80,13 +79,19 @@ export default {
     return{
       datapic:'',
       list:{surereg:true,gray:false},
-      show:false
+      show:false,
+      pho:'',
+      pwd:'',
+      pwdag:'',
+      yzm:''
     }
   },
   methods:{
     changpic(){
       this.axios.get(`/getcode`).then(result=>{
         this.datapic = result.data
+        var svg = document.querySelector('.register .useregister .yzm .data')
+        svg.style.backgroundColor=`RGB(${Math.random()*256},${Math.random()*256},${Math.random()*256})`
       })
     },
     showreg(){
@@ -97,6 +102,43 @@ export default {
     },
     closek(){
       this.show = false
+    },
+    usereg(){
+      if(this.list.gray){return;}
+      if(!/^1[3-9]\d{9}$/.test(this.pho)){
+        this.$toast('手机号码格式错误');
+        this.pho='';
+        return;
+      }
+      if(!/^\d{6,15}$/.test(this.pwd)){
+        this.$toast('密码格式错误');
+        this.pwd='';
+        return;
+      }
+      if(this.pwdag!==this.pwd){
+        this.$toast('两次输入密码不一致');
+        this.pwdag='';
+        return;
+      }
+      this.axios.post('/userreg',`pho=${this.pho}&pwd=${this.pwd}&yzm=${this.yzm}`).then(result=>{
+        console.log(result);
+        if(result.data.message=='error'){
+          this.$toast('验证码错误');
+          this.yzm='';
+          this.axios.get(`/getcode`).then(result=>{
+            console.log(result);
+            this.datapic = result.data
+          })
+          return;
+        }else if(result.data.code==100){
+          this.$toast('手机号码已存在');
+          this.pho='';
+          return;
+        }else{
+          this.$toast('注册成功');
+          this.$router.push(`/login`)
+        }
+      })
     }
   },
   mounted() {
@@ -157,9 +199,11 @@ export default {
   margin: 0;
   margin-right: 1rem;
 }
-.register .useregister .yzm .data svg{
+.register .useregister .yzm .data{
+  background-color: #ffa631; 
   border: 1px solid black;
-  background-color: #ffa631;
+}
+.register .useregister .yzm .data svg{
   width: 6rem;
   height: 2.5rem;
 }
