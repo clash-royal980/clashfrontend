@@ -9,7 +9,7 @@
     </guesstop>
     <guesstop v-else>
       <div class="usermsg">
-        <img :src="userinfo.toppic" alt="">
+        <img :src="userinfo.toppic" alt="" @click="goupdateinfo">
         <div class="text">
           <p>{{userinfo.username}}</p>
           <p>
@@ -69,6 +69,9 @@ export default {
       sessionStorage.removeItem('islogin');
       sessionStorage.removeItem('userphone');
       this.$store.commit('changelogin');
+    },
+    goupdateinfo(){
+      this.$router.push(`/userupdate`)
     }
   },
   mounted() {

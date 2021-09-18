@@ -71,6 +71,9 @@ export default {
       if(/register/.test(location.pathname)){
         this.flag = false
       }
+      if(/userupdate/.test(location.pathname)){
+        this.flag = false
+      }
     })
   },
   watch:{
@@ -87,7 +90,7 @@ export default {
       } 
     },
     $route(to){
-      if(/detail/.test(to.path)||/battle/.test(to.path)||/login/.test(to.path)||/register/.test(to.path)){
+      if(/detail/.test(to.path)||/battle/.test(to.path)||/login/.test(to.path)||/register/.test(to.path)||/userupdate/.test(to.path)){
         this.flag = false
       }else{
         this.flag = true

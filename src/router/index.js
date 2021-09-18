@@ -8,6 +8,7 @@ import Myguess from '../views/myguess.vue'
 import Guessdetail from '../views/guessdetail.vue'
 import Login from '../views/login.vue'
 import Register from '../views/register.vue'
+import Userupdate from '../views/userupdate.vue' 
 
 Vue.use(VueRouter)
 
@@ -51,6 +52,11 @@ const routes = [
     path: '/register',
     name: 'Register',
     component: Register
+  },
+  {
+    path: '/userupdate',
+    name: 'Userupdate',
+    component: Userupdate
   },
 ]
 
