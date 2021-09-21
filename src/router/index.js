@@ -8,7 +8,12 @@ import Myguess from '../views/myguess.vue'
 import Guessdetail from '../views/guessdetail.vue'
 import Login from '../views/login.vue'
 import Register from '../views/register.vue'
-import Userupdate from '../views/userupdate.vue' 
+import Userupdate from '../views/userupdate.vue'
+import Updatepic from '../views/updatepic.vue'
+import Shopbuy  from '../views/shopbuy.vue'
+import Shopdetail from '../views/shopdetail.vue'
+import Allrecord from '../views/allrecord.vue'
+import Video from '../views/video.vue'
 
 Vue.use(VueRouter)
 
@@ -57,6 +62,31 @@ const routes = [
     path: '/userupdate',
     name: 'Userupdate',
     component: Userupdate
+  },
+  {
+    path: '/updatepic',
+    name: 'Updatepic',
+    component: Updatepic
+  },
+  {
+    path: '/shopbuy',
+    name: 'Shopbuy',
+    component: Shopbuy
+  },
+  {
+    path: '/shopdetail',
+    name: 'Shopdetail',
+    component: Shopdetail
+  },
+  {
+    path: '/allrecord',
+    name: 'Allrecord',
+    component: Allrecord
+  },
+  {
+    path: '/video',
+    name: 'Video',
+    component: Video
   },
 ]
 

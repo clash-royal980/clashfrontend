@@ -3,18 +3,18 @@
    <header>
         <mt-header title="完善账号信息">
           <router-link slot="left" to="/myguess">
-              <mt-button  icon="back"></mt-button>
+              <mt-button  icon="back" @click="nochange"></mt-button>
           </router-link>
           <router-link slot="right" to="/myguess">
               <mt-button  icon="">
-                <div class="close"></div>
+                <div class="close" @click="nochange"></div>
               </mt-button>
           </router-link>
         </mt-header>
    </header>
    <div class="userinfo">
      <div class="userpic">
-       <img :src="userinfo.toppic" alt="">
+       <img :src="userinfo.toppic" alt="" @click="toupdate">
        <div class="edit"></div>
      </div>
      <div class="update">
@@ -22,26 +22,60 @@
       <span>邮箱:</span>
       <span>游戏ID:</span>
       <span>游戏昵称:</span>
-      <input type="text" placeholder="请输入11位手机号">
-      <input type="password" placeholder="必须为数字6-15位">
-      <input type="password" placeholder="与上次输入密码相同">
-      <input type="password" placeholder="与上次输入密码相同">
+      <input type="text" placeholder="请输入昵称" v-model="userinfo.username">
+      <input type="text" placeholder="请输入邮箱(选填)" v-model="userinfo.email">
+      <input type="text" placeholder="请输入游戏ID(选填)" v-model="userinfo.gameID">
+      <input type="text" placeholder="请输入游戏昵称(选填)" v-model="userinfo.gamename">
+      <div class="sureupdate" @click="sure">
+        <div class="bgpic"></div>
+          <span>确认</span>
+        </div>
      </div>
    </div>
+   <p>如果您需要帮助请联系我们，发邮件至(<span>contact@crlcn.com</span>)
+   </p>
   </div>
 </template>
 <script>
+// import {Bus} from '../main.js'
 export default {
   data(){
     return{
-      userinfo:[]
+      userinfo:[],
+      picurl:'',
+      flag:false
+    }
+  },
+  methods:{
+    toupdate(){
+      this.$router.push('/updatepic')
+    },
+    sure(){
+      this.axios.post('userup',`pic=${this.userinfo.toppic}&nc=${this.userinfo.username}&email=${this.userinfo.email}&gameID=${this.userinfo.gameID}&gamename=${this.userinfo.gamename}&phone=${this.userinfo.phone}`).then(result=>{
+        if(result.data.code==0){
+          this.$toast('您未做任何修改');
+        }else{
+          this.$toast('修改成功');
+          this.$router.push('/myguess')
+        }  
+      })
+    },
+    nochange(){
+      sessionStorage.removeItem('select');
     }
   },
   mounted() {
-    console.log(this.$store.state.islogin);
+    let select = sessionStorage.getItem('select')
+    // console.log(this.$store.state.islogin);
     this.axios.get(`selectuser?phone=${this.$store.state.userphone}`).then(result=>{
-      // console.log(result.data.result[0]);
       this.userinfo = result.data.result[0]
+      // console.log(this.userinfo);
+      this.picurl=this.userinfo.toppic
+      if(select){
+        this.userinfo.toppic = `/img/toppic/${select}.png`
+        // sessionStorage.setItem('select',parseInt(this.picurl.slice(12)));
+      }
+      
     })
   },
 }
@@ -72,8 +106,8 @@ export default {
   background-position: -18px -13px;
 }
 .userupdate .mint-header-title{
-    height: 1.2rem;
-    line-height: 1.2rem;
+    /* height: 1.2rem;
+    line-height: 1.2rem; */
 }
 .userupdate .userinfo .userpic{
   margin-top: 1rem;
@@ -153,6 +187,35 @@ export default {
   top: 12.1rem;
   left: 1rem;
 }
+.userupdate .userinfo  .sureupdate .bgpic{
+  /* margin: 0 auto;  */
+  width: 620px;
+  height: 120px;
+  background-image: url(/img/login.png);
+  background-position: 0 -78px;
+  position: relative;
+}
+.userupdate .userinfo  .sureupdate{
+  /* margin: 0 auto; */
+  position: relative;
+}
+.userupdate .userinfo .sureupdate span{
+  color: #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  font-size: 2rem;
+}
+.userupdate>p{
+  color: #fff;
+  font-size: .8rem;
+  text-align: center;
+}
+.userupdate>p>span{
+  color: #78b7fe;
+}
+
 
 @media screen and (min-width:280px){  
   html{font-size: 12px !important;}
@@ -164,6 +227,9 @@ export default {
     bottom: -13px;
     left: 141px;
   }
+  .userupdate .userinfo .sureupdate{
+    zoom: .38;
+  }
 }
 @media screen and (min-width:320px){  
   html{font-size: 12.8px !important;}
@@ -171,6 +237,9 @@ export default {
     transform: scale(.5);
     bottom: -12px;
     left: 162px;
+  }
+  .userupdate .userinfo .sureupdate{
+    zoom: .43 ;
   }
 }
 @media screen and (min-width:360px){  
@@ -183,6 +252,9 @@ export default {
     bottom: -10px;
     left: 187px;
   }
+  .userupdate .userinfo .sureupdate{
+    zoom: .49;
+  }
 }
 @media screen and (min-width:375px){  
   html{font-size: 15px !important;}
@@ -193,6 +265,9 @@ export default {
     transform: scale(.55);
     bottom: -11px;
     left: 195px;
+  }
+  .userupdate .userinfo .sureupdate{
+    zoom: .5;
   }
 }
 @media screen and (min-width:410px){  
@@ -205,6 +280,9 @@ export default {
     bottom: -9px;
     left: 218px;
   }
+  .userupdate .userinfo .sureupdate{
+    zoom: .55;
+  }
 }
 @media screen and (min-width:540px){  
   html{font-size: 21.6px !important;}
@@ -215,6 +293,12 @@ export default {
     transform: scale(.8);
     bottom: -5px;
     left: 292px;
+  }
+  .userupdate .userinfo .sureupdate{
+    zoom: .73;
+  }
+  .userupdate .userinfo .sureupdate span{
+    font-size: 1.4rem;
   }
 }
 @media screen and (min-width:760px){  
@@ -227,6 +311,12 @@ export default {
     bottom:0px;
     left: 426px;
   }
+  .userupdate .userinfo .sureupdate{
+    zoom: 1;
+  }
+  .userupdate .userinfo .sureupdate span{
+    font-size: .9rem;
+  }
 }
 @media screen and (min-width:1000px){  
   html{font-size: 40px !important;}
@@ -234,6 +324,12 @@ export default {
     transform: scale(1.2);
     bottom:5px;
     left: 578px;
+  }
+  .userupdate .userinfo .sureupdate{
+    zoom: 1.38;
+  }
+  .userupdate .userinfo .sureupdate span{
+    font-size: .7rem;
   }
 }
 </style>

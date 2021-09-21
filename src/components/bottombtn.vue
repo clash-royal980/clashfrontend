@@ -56,6 +56,9 @@ export default {
       if(location.pathname.slice(1)=='tenking'){
         this.selected = '2';
       }
+      if(location.pathname.slice(1)=='video'){
+        this.selected = '4';
+      }
       if(location.pathname.slice(1)=='myguess'){
         this.selected = '5';
       }
@@ -74,6 +77,15 @@ export default {
       if(/userupdate/.test(location.pathname)){
         this.flag = false
       }
+      if(/updatepic/.test(location.pathname)){
+        this.flag = false
+      }
+      if(/shop/.test(location.pathname)){
+        this.flag = false
+      }
+      if(/allrecord/.test(location.pathname)){
+        this.flag = false
+      }
     })
   },
   watch:{
@@ -83,6 +95,9 @@ export default {
       }else if(newvalue=='2'){
         if(location.pathname.slice(1)=='tenking') return;
         this.$router.push('/tenking')
+      }else if(newvalue=='4'){
+        if(location.pathname.slice(1)=='video') return;
+        this.$router.push('/video')
       }
       else if(newvalue=='5'){
         if(location.pathname.slice(1)=='myguess') return;
@@ -90,7 +105,7 @@ export default {
       } 
     },
     $route(to){
-      if(/detail/.test(to.path)||/battle/.test(to.path)||/login/.test(to.path)||/register/.test(to.path)||/userupdate/.test(to.path)){
+      if(/detail/.test(to.path)||/battle/.test(to.path)||/login/.test(to.path)||/register/.test(to.path)||/userupdate/.test(to.path)||/updatepic/.test(to.path)||/shop/.test(to.path)||/allrecord/.test(to.path)){
         this.flag = false
       }else{
         this.flag = true

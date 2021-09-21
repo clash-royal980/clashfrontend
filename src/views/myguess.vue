@@ -26,7 +26,8 @@
         <img src="/img/set.png" alt="">
       </div>
       <span class="close" @click="notlogin">退出</span>
-      <div class="shop"></div>
+      <span class="info" @click="torecord">记录</span>
+      <div class="shop" @click="toshop"></div>
     </guesstop>
     <ul>
       <li>
@@ -72,10 +73,16 @@ export default {
     },
     goupdateinfo(){
       this.$router.push(`/userupdate`)
+    },
+    toshop(){
+      this.$router.push(`/shopbuy`)
+    },
+    torecord(){
+      this.$router.push(`/allrecord`)
     }
   },
   mounted() {
-    console.log(this.$store.state.islogin);
+    // console.log(this.$store.state.islogin);
     this.axios.get(`selectuser?phone=${this.$store.state.userphone}`).then(result=>{
       // console.log(result.data.result[0]);
       this.userinfo = result.data.result[0]
@@ -120,6 +127,12 @@ export default {
   position: absolute;
   right: 5%;
   top: 40%;
+}
+.myguess .info{
+  font-size: .9rem;
+  position: absolute;
+  right: 5%;
+  top: 65%;
 }
 .myguess .text p:first-child{
   color: #fff;
