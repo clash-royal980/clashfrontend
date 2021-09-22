@@ -12,37 +12,28 @@
           </h5>
         </div>
         <div class="gameitem">
-          <div class="item">
+          <div class="item" v-for="(item,index) of crlvideos" :key="index">
             <p>2021CRL</p>
             <div class="vsdetail">
               <div class="play">
-                <img src="/img/video/people/1.png" alt="">
-                <span>Light</span>
+                <img :src="`${item.vi_pic1}`" alt="">
+                <span>{{item.vi_name1}}</span>
               </div>
               <p>2 - 0</p>
               <div class="play">
-                <img src="/img/video/people/2.png" alt="">
-                <span>Brewzany</span>
+                <img :src="`${item.vi_pic2}`" alt="">
+                <span>{{item.vi_name2}}</span>
               </div>
             </div>
             <div class="video">
               <img src="/img/video/seevideo.png" alt="" @click="look">
             </div>
             <div class="bottom">
-              <p>2021-08-21</p>
+              <p>{{item.vi_time}}</p>
             </div>
           </div>
-          <div class="item">
-
-          </div>
-          <div class="item">
-
-          </div>
-          <div class="item">
-
-          </div>
         </div>
-        <van-popup v-model="show">
+        <van-popup v-model="show" @click-overlay="close">
           <video src="/img/1.mp4" controls></video>
         </van-popup>
       </van-tab>
@@ -58,7 +49,8 @@ export default {
   data() {
     return {
       active: 0,
-      show:false
+      show:false,
+      crlvideos:[]
     }
   },
   methods: {
@@ -66,13 +58,25 @@ export default {
     next() {},
     look(){
       this.show = true;
-      let timer = setTimeout(()=>{
+      // let timer = setTimeout(()=>{
+      //   let jd = document.querySelector('.videopage .van-popup video')
+      //   jd.pause();
+      //   jd.currentTime=0;
+      // },0) 
+    },
+    close(){
+      this.show = false;
         let jd = document.querySelector('.videopage .van-popup video')
         jd.pause();
         jd.currentTime=0;
-      },0) 
-    },  
+    }
   },
+  mounted(){
+    this.axios.get('/crlvideo').then((results)=>{
+      console.log(results);
+      this.crlvideos = results.data.results
+    })
+  }
 };
 </script>
 <style>
@@ -80,6 +84,7 @@ export default {
   width: 95%;
   margin: 1rem auto;
   font-size: 1rem;
+  margin-bottom: 5rem;
 }
 .videopage .tabs {
   background-color: #2383c5;
@@ -167,10 +172,13 @@ export default {
 }
 .videopage .gameitem .item{
   width: 48%;
-  height: 9.66rem;
+  height: 10.48rem;
   background-color: #0C61AF;
   border-radius: 5px;
   /* margin-top: .5rem; */
+  text-align: center;
+  overflow: hidden;
+  position: relative;
 }
 .videopage .gameitem .item:nth-child(n+3){
   margin-top: .5rem;
@@ -210,11 +218,18 @@ export default {
   margin:  0 auto;
 }
 .videopage .gameitem .item .bottom p{
-  margin-top: .4rem;
-  padding: .4rem;
+  /* margin-top: .4rem; */
+  padding: .2rem 0;
   background-color: #2585C9;
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
+  position: absolute;
+  bottom: 0;
+  text-align: center;
+  width: 100%;
+}
+.videopage .van-popup{
+  background-color: transparent;
 }
 .videopage .van-popup video{
   width: 100vw;
