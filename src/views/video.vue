@@ -11,6 +11,40 @@
             <span style="position: absolute; right: 0"></span>
           </h5>
         </div>
+        <div class="gameitem">
+          <div class="item">
+            <p>2021CRL</p>
+            <div class="vsdetail">
+              <div class="play">
+                <img src="/img/video/people/1.png" alt="">
+                <span>Light</span>
+              </div>
+              <p>2 - 0</p>
+              <div class="play">
+                <img src="/img/video/people/2.png" alt="">
+                <span>Brewzany</span>
+              </div>
+            </div>
+            <div class="video">
+              <img src="/img/video/seevideo.png" alt="" @click="look">
+            </div>
+            <div class="bottom">
+              <p>2021-08-21</p>
+            </div>
+          </div>
+          <div class="item">
+
+          </div>
+          <div class="item">
+
+          </div>
+          <div class="item">
+
+          </div>
+        </div>
+        <van-popup v-model="show">
+          <video src="/img/1.mp4" controls></video>
+        </van-popup>
       </van-tab>
       <van-tab title="采访">采访</van-tab>
       <van-tab title="花絮">花絮</van-tab>
@@ -24,11 +58,20 @@ export default {
   data() {
     return {
       active: 0,
-    };
+      show:false
+    }
   },
   methods: {
     prev() {},
     next() {},
+    look(){
+      this.show = true;
+      let timer = setTimeout(()=>{
+        let jd = document.querySelector('.videopage .van-popup video')
+        jd.pause();
+        jd.currentTime=0;
+      },0) 
+    },  
   },
 };
 </script>
@@ -80,6 +123,8 @@ export default {
   background-color: #093055;
   margin-top: -0.15rem;
   overflow: hidden;
+  border-bottom-left-radius:5px;
+  border-bottom-right-radius:5px;
 }
 .videopage .gamecontent {
   position: relative;
@@ -111,6 +156,69 @@ export default {
   background-image: url(/img/tenking/team_sp.24e9ce0.png);
   background-position: -80px -267px;
 }
+.videopage .gameitem{
+  margin: 0 auto;
+  width: 95%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+.videopage .gameitem .item{
+  width: 48%;
+  height: 9.66rem;
+  background-color: #0C61AF;
+  border-radius: 5px;
+  /* margin-top: .5rem; */
+}
+.videopage .gameitem .item:nth-child(n+3){
+  margin-top: .5rem;
+}
+.videopage .gameitem .item p{
+  text-align: center;
+  color: #fff;
+  font-size: .8rem;
+  padding: .7rem 0;
+}
+.videopage .gameitem .item img{
+  width: 2.13rem;
+  height: 2.13rem;
+}
+.videopage .gameitem .item .vsdetail{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.videopage .gameitem .item .vsdetail p{
+  font-size: 1.2rem;
+  /* width: 35%; */
+  text-align: center;
+}
+.videopage .gameitem .item .vsdetail .play{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content:center;
+  align-items: center;
+  font-size: .8rem;
+  color: #fff;
+  flex: 1;
+}
+.videopage .gameitem .item .video img{
+  width: 5.8rem;
+  display: block;
+  margin:  0 auto;
+}
+.videopage .gameitem .item .bottom p{
+  margin-top: .4rem;
+  padding: .4rem;
+  background-color: #2585C9;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+.videopage .van-popup video{
+  width: 100vw;
+}
 
 @media screen and (min-width: 280px) {
   .videopage .gamecontent > span {
@@ -139,10 +247,16 @@ export default {
   .videopage .gamecontent h5 span:nth-child(3) {
     margin-right: 15px;
   }
+  .videopage .gameitem .item .vsdetail p{
+    transform: translateX(5px);
+  }
 }
 @media screen and (min-width: 320px) {
   .videopage .gamecontent > span {
     font-size: 14px;
+  }
+  .videopage .gameitem .item .vsdetail p{
+    transform: translateX(0);
   }
 }
 @media screen and (min-width: 360px) {
