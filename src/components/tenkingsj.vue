@@ -267,7 +267,7 @@ export default {
   background-color: #0C3E6C;
   color: #fff;
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   align-content: center;
   border: 2px solid #013153;
 }

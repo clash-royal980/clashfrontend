@@ -6,7 +6,7 @@
           <h5>
             <span style="position: absolute; left: 0"></span>
             <span style="position: absolute; left: 0" @click="prev">上一周</span>
-            七月
+            {{now}}
             <span style="position: absolute; right: 0" @click="next">下一周</span>
             <span style="position: absolute; right: 0"></span>
           </h5>
@@ -19,7 +19,7 @@
                 <img :src="`${item.vi_pic1}`" alt="">
                 <span>{{item.vi_name1}}</span>
               </div>
-              <p>2 - 0</p>
+              <p>{{item.vi_vs}}</p>
               <div class="play">
                 <img :src="`${item.vi_pic2}`" alt="">
                 <span>{{item.vi_name2}}</span>
@@ -50,12 +50,20 @@ export default {
     return {
       active: 0,
       show:false,
-      crlvideos:[]
+      crlvideos:[],
+      mouth:7,
+      now:'七月'
     }
   },
   methods: {
-    prev() {},
-    next() {},
+    prev() {
+      if(this.mouth>1)
+      this.mouth--;
+    },
+    next() {
+      if(this.mouth<12)
+      this.mouth++;
+    },
     look(){
       this.show = true;
       // let timer = setTimeout(()=>{
@@ -76,6 +84,12 @@ export default {
       console.log(results);
       this.crlvideos = results.data.results
     })
+    
+  },
+  watch:{
+    mouth(){
+      this.now = this.mouth==1?'一月':this.mouth==2?'二月':this.mouth==3?'三月':this.mouth==4?'四月':this.mouth==5?'五月':this.mouth==6?'六月':this.mouth==7?'七月':this.mouth==8?'八月':this.mouth==9?'九月':this.mouth==10?'十月':this.mouth==11?'十一月':'十二月'
+    }
   }
 };
 </script>
@@ -212,6 +226,11 @@ export default {
   color: #fff;
   flex: 1;
 }
+.videopage .gameitem .item .video{
+  position: absolute;
+  bottom: 2rem;
+  left: 2rem;
+}
 .videopage .gameitem .item .video img{
   width: 5.8rem;
   display: block;
@@ -263,7 +282,10 @@ export default {
     margin-right: 15px;
   }
   .videopage .gameitem .item .vsdetail p{
-    transform: translateX(5px);
+    /* transform: translateX(5px); */
+  }
+  .videopage .gameitem .item .video{
+    bottom: 1.5rem;
   }
 }
 @media screen and (min-width: 320px) {

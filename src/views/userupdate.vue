@@ -75,7 +75,6 @@ export default {
         this.userinfo.toppic = `/img/toppic/${select}.png`
         // sessionStorage.setItem('select',parseInt(this.picurl.slice(12)));
       }
-      
     })
   },
 }

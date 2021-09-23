@@ -16,7 +16,7 @@
       <h5>
         <span style="position: absolute;left:0"></span>
         <span style="position: absolute;left:0" @click="prev">上一周</span>
-        踢馆赛&冒泡赛{{tenkingpeople[0].game_type}}
+        踢馆赛&冒泡赛{{type}}
         <span style="position: absolute;right:0" @click="next">下一周</span>
         <span style="position: absolute;right:0"></span>
       </h5>
@@ -51,7 +51,7 @@ export default {
     return{
       zom:1,
       isshow:true,
-      tenkingpeople:[{game_type:'W3'}],
+      tenkingpeople:[],
       type:'W3',
       picid:4
     }
